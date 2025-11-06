@@ -19,6 +19,10 @@ public class Inventario_manmager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        while (hotbar.Count < hotbarSlots)
+        {
+            hotbar.Add(new InventorySlot(null, 0));
+        }
     }
 
     // 🔹 Añadir ítem (primero intenta llenar la hotbar si hay espacio)
@@ -30,6 +34,19 @@ public class Inventario_manmager : MonoBehaviour
             if (slot.item == item && slot.quantity < item.maxStack)
             {
                 slot.quantity++;
+                OnChange?.Invoke();
+                return true;
+            }
+        }
+
+        // Intentar llenar un slot vacío en hotbar
+        foreach (var slot in hotbar)
+        {
+            if (slot.item == null)
+            {
+                slot.item = item;
+                slot.quantity = 1;
+                OnChange?.Invoke();
                 return true;
             }
         }
@@ -40,21 +57,16 @@ public class Inventario_manmager : MonoBehaviour
             if (slot.item == item && slot.quantity < item.maxStack)
             {
                 slot.quantity++;
+                OnChange?.Invoke();
                 return true;
             }
-        }
-
-        // Si hay espacio en hotbar y está vacía
-        if (hotbar.Count < hotbarSlots)
-        {
-            hotbar.Add(new InventorySlot(item, 1));
-            return true;
         }
 
         // Si hay espacio en mochila
         if (inventory.Count < maxInventorySlots)
         {
             inventory.Add(new InventorySlot(item, 1));
+            OnChange?.Invoke();
             return true;
         }
 
@@ -81,13 +93,16 @@ public class Inventario_manmager : MonoBehaviour
             {
                 inventory[i].quantity--;
                 if (inventory[i].quantity <= 0) inventory.RemoveAt(i);
+                OnChange?.Invoke();
                 return;
             }
         }
     }
+    public static event System.Action OnChange;
 }
 
 [System.Serializable]
+
 public class InventorySlot
 {
     public items_datos item;
