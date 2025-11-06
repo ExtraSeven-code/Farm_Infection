@@ -406,6 +406,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f97770c9a3cbc94abd67124af8d538f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1515248574}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f97770c9a3cbc94abd67124af8d538f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1515248575}
   m_SourcePrefab: {fileID: 100100000, guid: 6f97770c9a3cbc94abd67124af8d538f, type: 3}
 --- !u!4 &29816143 stripped
 Transform:
@@ -19983,6 +19986,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelInventario: {fileID: 852043376}
+--- !u!114 &1515248575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515248568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbf30d101473b647b59599dc9504c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSlot: 0
+  slotsParent: {fileID: 2082809656}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1515687532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5992611954999453432, guid: 2b99154c2a52a90469363eb6134d849d, type: 3}

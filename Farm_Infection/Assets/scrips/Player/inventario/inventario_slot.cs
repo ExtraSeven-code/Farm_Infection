@@ -9,8 +9,10 @@ public class inventario_slot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI quantityText;
 
-    private items_datos currentItem;
-    private int quantity;
+    public items_datos currentItem { get; private set; }
+
+    public int quantity { get; private set; }
+
 
     public void SetItem(items_datos item, int amount)
     {
