@@ -37,16 +37,38 @@ public class VoxelEditorInspector : Editor
 
     private Vector3 GetMousePosition(float gridSize)
     {
-        Plane plane = new Plane(Vector3.up, Vector3.zero);
         Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
 
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            // 🟢 Si estás presionando clic izquierdo, coloca encima del bloque tocado
+            if (Event.current.button == 0)
+            {
+                Vector3 pos = hit.point + hit.normal * (gridSize / 2f);
+                pos /= gridSize;
+                pos = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z)) * gridSize;
+                return pos;
+            }
+            // 🔴 Si es clic derecho, elimina el bloque tocado
+            else if (Event.current.button == 1)
+            {
+                Vector3 pos = hit.point - hit.normal * (gridSize / 2f);
+                pos /= gridSize;
+                pos = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z)) * gridSize;
+                return pos;
+            }
+        }
+
+        // Si no tocó nada, usa plano base Y=0 (para iniciar el mapa)
+        Plane plane = new Plane(Vector3.up, Vector3.zero);
         if (plane.Raycast(ray, out float enter))
         {
-            Vector3 hit = ray.GetPoint(enter);
-            hit /= gridSize;
-            hit = new Vector3(Mathf.Round(hit.x), Mathf.Round(hit.y), Mathf.Round(hit.z)) * gridSize;
-            return hit;
+            Vector3 hitpoint = ray.GetPoint(enter);
+            hitpoint /= gridSize;
+            hitpoint = new Vector3(Mathf.Round(hitpoint.x), Mathf.Round(hitpoint.y), Mathf.Round(hitpoint.z)) * gridSize;
+            return hitpoint;
         }
+
         return Vector3.zero;
     }
 

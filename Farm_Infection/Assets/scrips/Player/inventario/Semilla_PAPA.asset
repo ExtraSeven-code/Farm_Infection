@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5ea55728cad4449b500cd10f2d21d1, type: 3}
+  m_Name: Semilla_PAPA
+  m_EditorClassIdentifier: 
+  itemName: Semilla de Papa
+  description: Se puede plnatar en una maceta
+  icon: {fileID: 21300000, guid: 2fc9e69e1e0554d448b823e2f9f3e8b0, type: 3}
+  model3D: {fileID: 563350766288374711, guid: e902ef9b471c7584fa1c1f9656c450b9, type: 3}
+  maxStack: 8
