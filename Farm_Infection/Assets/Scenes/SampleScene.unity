@@ -25272,6 +25272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944140251}
   - component: {fileID: 1944140250}
+  - component: {fileID: 1944140252}
   m_Layer: 0
   m_Name: inventario_manager
   m_TagString: Untagged
@@ -25310,6 +25311,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944140252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944140249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d34932e43de19f438a774bea6d4c3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotPrefab: {fileID: 3091199584184875865, guid: 7cd10518b9b443549b2dd891ff770167, type: 3}
+  InventoryPanel: {fileID: 852043377}
+  HotbarPanel: {fileID: 2082809656}
 --- !u!4 &1944610833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5992611954999453432, guid: 2b99154c2a52a90469363eb6134d849d, type: 3}

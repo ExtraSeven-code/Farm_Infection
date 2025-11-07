@@ -23,6 +23,10 @@ public class Inventario_manmager : MonoBehaviour
         {
             hotbar.Add(new InventorySlot(null, 0));
         }
+        while (inventory.Count < maxInventorySlots)
+        {
+            inventory.Add(new InventorySlot(null, 0));
+        }
     }
 
     // 🔹 Añadir ítem (primero intenta llenar la hotbar si hay espacio)
@@ -51,7 +55,7 @@ public class Inventario_manmager : MonoBehaviour
             }
         }
 
-        // Intentar acumular en mochila
+        // 3️⃣ Intentar acumular en mochila
         foreach (var slot in inventory)
         {
             if (slot.item == item && slot.quantity < item.maxStack)
@@ -62,37 +66,58 @@ public class Inventario_manmager : MonoBehaviour
             }
         }
 
-        // Si hay espacio en mochila
-        if (inventory.Count < maxInventorySlots)
+        // 4️⃣ Intentar llenar un slot vacío en mochila
+        foreach (var slot in inventory)
         {
-            inventory.Add(new InventorySlot(item, 1));
-            OnChange?.Invoke();
-            return true;
+            if (slot.item == null)
+            {
+                slot.item = item;
+                slot.quantity = 1;
+                OnChange?.Invoke();
+                return true;
+            }
         }
+
+        // Si hay espacio en mochila
+
 
         Debug.Log("Inventario lleno");
         return false;
+    }
+    public static void NotifyChange()
+    {
+        OnChange?.Invoke();
     }
 
     // 🔹 Quitar ítem (busca primero en hotbar)
     public void RemoveItem(items_datos item)
     {
-        for (int i = 0; i < hotbar.Count; i++)
+        foreach (var slot in hotbar)
         {
-            if (hotbar[i].item == item)
+            if (slot.item == item)
             {
-                hotbar[i].quantity--;
-                if (hotbar[i].quantity <= 0) hotbar.RemoveAt(i);
+                slot.quantity--;
+                if (slot.quantity <= 0)
+                {
+                    slot.item = null;
+                    slot.quantity = 0;
+                }
+                OnChange?.Invoke();
                 return;
             }
         }
 
-        for (int i = 0; i < inventory.Count; i++)
+        // Después mochila
+        foreach (var slot in inventory)
         {
-            if (inventory[i].item == item)
+            if (slot.item == item)
             {
-                inventory[i].quantity--;
-                if (inventory[i].quantity <= 0) inventory.RemoveAt(i);
+                slot.quantity--;
+                if (slot.quantity <= 0)
+                {
+                    slot.item = null;
+                    slot.quantity = 0;
+                }
                 OnChange?.Invoke();
                 return;
             }
