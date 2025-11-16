@@ -21,6 +21,7 @@ public class SlotUI : MonoBehaviour
     private void Update()
     {
         Refresh();
+        UpdateSelectionVisual();
     }
 
     public void Refresh()
@@ -41,5 +42,30 @@ public class SlotUI : MonoBehaviour
             // ✅ Mostrar siempre la cantidad (incluido el 1)
             quantityText.text = slot.quantity.ToString();
         }
+    }
+    private void UpdateSelectionVisual()
+    {
+        if (backgroundImage == null)
+            return;
+
+        // Solo queremos resaltar slots de la hotbar
+        if (!isHotbar)
+        {
+            backgroundImage.color = normalColor;
+            return;
+        }
+
+        HotbarSelector selector = FindObjectOfType<HotbarSelector>();
+        if (selector == null)
+        {
+            backgroundImage.color = normalColor;
+            return;
+        }
+
+        // ¿Este slot es el índice activo de la hotbar?
+        if (selector.currentIndex == index)
+            backgroundImage.color = selectedColor;
+        else
+            backgroundImage.color = normalColor;
     }
 }

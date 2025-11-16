@@ -274,6 +274,9 @@ MonoBehaviour:
   index: 0
   iconImage: {fileID: 0}
   quantityText: {fileID: 0}
+  backgroundImage: {fileID: 5585918397764063949}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
 --- !u!114 &2621054356723845931
 MonoBehaviour:
   m_ObjectHideFlags: 0
