@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5ea55728cad4449b500cd10f2d21d1, type: 3}
-  m_Name: Semilla_PAPA
+  m_Script: {fileID: 11500000, guid: 00e059b74ff8f3e45a221ea8b6595764, type: 3}
+  m_Name: semilla_Papa
   m_EditorClassIdentifier: 
-  itemName: Semilla de Papa
-  description: Se puede plnatar en una maceta
+  id: 1
+  displayName: Semilla Papa
   icon: {fileID: 21300000, guid: 2fc9e69e1e0554d448b823e2f9f3e8b0, type: 3}
-  model3D: {fileID: 563350766288374711, guid: e902ef9b471c7584fa1c1f9656c450b9, type: 3}
-  maxStack: 8
+  maxStack: 64
+  isConsumable: 1
