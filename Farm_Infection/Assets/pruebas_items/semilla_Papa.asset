@@ -18,3 +18,7 @@ MonoBehaviour:
   maxStack: 64
   isConsumable: 1
   worldPrefab: {fileID: 563350766288374711, guid: e902ef9b471c7584fa1c1f9656c450b9, type: 3}
+  isSeed: 1
+  plantPrefab: {fileID: 0}
+  harvestItem: {fileID: 0}
+  harvestAmount: 1
