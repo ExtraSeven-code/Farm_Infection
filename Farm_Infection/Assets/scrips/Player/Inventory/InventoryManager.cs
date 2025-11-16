@@ -122,4 +122,17 @@ public class InventoryManager : MonoBehaviour
         a.item = tempItem;
         a.quantity = tempQty;
     }
+    public bool RemoveItemFromSlot(bool fromHotbar, int index, int amount = 1)
+    {
+        InventorySlot slot = GetSlot(fromHotbar, index);
+        if (slot == null || slot.IsEmpty) return false;
+        if (slot.quantity < amount) return false;
+
+        slot.quantity -= amount;
+
+        if (slot.quantity <= 0)
+            slot.Clear();
+
+        return true;
+    }
 }

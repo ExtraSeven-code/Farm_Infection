@@ -13,6 +13,11 @@ public class SlotUI : MonoBehaviour
     public Image iconImage;
     public TextMeshProUGUI quantityText;
 
+    public Image backgroundImage;
+
+    public Color normalColor = Color.white;
+    public Color selectedColor = Color.yellow;
+
     private void Update()
     {
         Refresh();

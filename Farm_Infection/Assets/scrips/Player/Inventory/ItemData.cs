@@ -13,4 +13,7 @@ public class ItemData : ScriptableObject
     [Header("Configuración")]
     public int maxStack = 64;
     public bool isConsumable;
+
+    [Header("Prefab en el mundo 3D")]
+    public GameObject worldPrefab;
 }
