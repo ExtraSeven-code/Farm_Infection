@@ -18,8 +18,11 @@ public class ItemData : ScriptableObject
     public GameObject worldPrefab;
 
     [Header("Semilla / Planta (opcional)")]
-    public bool isSeed;                 // ✅ marcar si este item es una semilla
-    public GameObject plantPrefab;      // modelo de la planta en la maceta
+    public bool isSeed;                 // ✅ marcar si es una semilla
+    public GameObject plantPrefab;      // planta que aparece en la maceta
     public ItemData harvestItem;        // fruto que dará al cosechar
     public int harvestAmount = 1;
+
+    [Header("Herramienta (opcional)")]
+    public bool isWateringTool;
 }

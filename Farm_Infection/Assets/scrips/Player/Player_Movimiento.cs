@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,8 @@ public class Player_Movimiento : MonoBehaviour
     public bool isWalking;
     public bool isIdle = true;
 
+    public bool isInteracting;   // <-- nueva línea
+
     public Transform cameraTransform;
 
 
@@ -26,6 +28,15 @@ public class Player_Movimiento : MonoBehaviour
 
     void FixedUpdate()
     {
+        // ⛔ Bloquear movimiento durante la animación de interacción
+        if (isInteracting)
+        {
+            rb.velocity = Vector3.zero;
+            animator.SetBool("EstaCaminando", false);
+            animator.SetBool("EstaParado", true);
+            return;
+        }
+
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 cameraForward = cameraTransform.forward;
