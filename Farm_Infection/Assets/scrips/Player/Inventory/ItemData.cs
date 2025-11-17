@@ -29,4 +29,20 @@ public class ItemData : ScriptableObject
     [Header("Colocables tipo bloque")]
     public bool isPlaceableBlock;         
     public GameObject placeablePrefab;
+
+    public enum ToolType
+    {
+        None,
+        Axe,
+        Pickaxe,
+        Hoe
+    }
+
+    [Header("Herramientas")]
+    public bool isTool;
+    public ToolType toolType;
+    public int toolPower = 1;
+
+    [Header("Modelo en la mano")]
+    public GameObject handPrefab;
 }

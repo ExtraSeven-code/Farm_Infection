@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00e059b74ff8f3e45a221ea8b6595764, type: 3}
-  m_Name: regadera
+  m_Name: hacha
   m_EditorClassIdentifier: 
-  id: 2
-  displayName: regadera
-  icon: {fileID: 21300000, guid: c23398a30de98f642b77bc079fd9b9f2, type: 3}
-  maxStack: 64
+  id: 7
+  displayName: hacha
+  icon: {fileID: 21300000, guid: bb3aaa2e63c3c214db7da66fc91fe4ab, type: 3}
+  maxStack: 1
   isConsumable: 0
-  worldPrefab: {fileID: 7664220900394363693, guid: 5faba080345f85d4680375a9444b3f86, type: 3}
+  worldPrefab: {fileID: 2679559397366445111, guid: 16b704f4b8a42c64db223b9c2d98f8aa, type: 3}
   isSeed: 0
   plantPrefab: {fileID: 0}
   harvestItem: {fileID: 0}
   harvestAmount: 1
-  isWateringTool: 1
+  isWateringTool: 0
   isPlaceableBlock: 0
   placeablePrefab: {fileID: 0}
-  isTool: 0
-  toolType: 0
+  isTool: 1
+  toolType: 1
   toolPower: 1
-  handPrefab: {fileID: 4297905949184786771, guid: b798d4138718294439c209f0567f68fd, type: 3}
+  handPrefab: {fileID: 4501451700155690123, guid: ec2b7432c2324024aacea74fb0ad146f, type: 3}

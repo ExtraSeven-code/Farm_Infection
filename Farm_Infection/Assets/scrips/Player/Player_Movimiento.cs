@@ -17,6 +17,7 @@ public class Player_Movimiento : MonoBehaviour
     public bool isInteracting;   // <-- nueva línea
 
     public Transform cameraTransform;
+    public bool canMove = true;
 
 
     void Start()
@@ -28,9 +29,17 @@ public class Player_Movimiento : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove)
+        {
+            // Opcional: parar al jugador en seco
+            rb.velocity = Vector3.zero;
+            animator.SetBool("EstaCaminando", false);
+            animator.SetBool("EstaParado", true);
+            return;
+        }
         // ⛔ Bloquear movimiento durante la animación de interacción
-        if(isInteracting)
-    {
+        if (isInteracting)
+        {
             rb.velocity = Vector3.zero;
             animator.SetBool("EstaCaminando", false);
             animator.SetBool("EstaParado", true);
