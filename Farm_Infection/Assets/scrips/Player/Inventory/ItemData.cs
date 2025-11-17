@@ -45,4 +45,11 @@ public class ItemData : ScriptableObject
 
     [Header("Modelo en la mano")]
     public GameObject handPrefab;
+
+    [Header("Comida")]
+    public bool isFood;
+    public float restoreHealth;
+    public float restoreStamina;
+    public float restoreHunger;
+    public float restoreSanity;
 }

@@ -23,3 +23,14 @@ MonoBehaviour:
   harvestItem: {fileID: 0}
   harvestAmount: 1
   isWateringTool: 0
+  isPlaceableBlock: 0
+  placeablePrefab: {fileID: 0}
+  isTool: 0
+  toolType: 0
+  toolPower: 1
+  handPrefab: {fileID: 0}
+  isFood: 1
+  restoreHealth: 10
+  restoreStamina: 10
+  restoreHunger: 10
+  restoreSanity: 0
