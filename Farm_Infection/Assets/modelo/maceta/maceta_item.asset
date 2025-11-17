@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e059b74ff8f3e45a221ea8b6595764, type: 3}
+  m_Name: maceta_item
+  m_EditorClassIdentifier: 
+  id: 5
+  displayName: maceta
+  icon: {fileID: 21300000, guid: d6ac0d4513e47f0459dc04d0d88037d5, type: 3}
+  maxStack: 8
+  isConsumable: 0
+  worldPrefab: {fileID: 8969485800983023238, guid: ad3fb0bc8a165a54da635d12422eba4a, type: 3}
+  isSeed: 0
+  plantPrefab: {fileID: 0}
+  harvestItem: {fileID: 0}
+  harvestAmount: 1
+  isWateringTool: 0
+  isPlaceableBlock: 1
+  placeablePrefab: {fileID: 5819290026300322493, guid: 16c76970ee19fd84c987961a22b82f40, type: 3}

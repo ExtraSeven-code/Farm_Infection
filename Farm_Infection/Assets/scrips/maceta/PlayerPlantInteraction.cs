@@ -5,15 +5,20 @@ using UnityEngine;
 public class PlayerPlantInteraction : MonoBehaviour
 {
     [Header("Referencias")]
-    public Animator animator;                 // Animator del jugador
-    public string interactTrigger = "Interact";  // Trigger en el Animator
+    public Animator animator;
+    public string interactTrigger = "Interact";
+
+    [Header("Bloqueo de movimiento")]
+    public float interactLockTime;   // dura lo que dura la animación
 
     private HotbarSelector hotbarSelector;
     private PlantPot currentPot;
+    private Player_Movimiento playerMovimiento;
 
     public PlantPot CurrentPot => currentPot;
 
-    private Player_Movimiento playerMovimiento;
+    [Header("UI")]
+    public GameObject pressEPanel;
 
     private void Awake()
     {
@@ -24,7 +29,8 @@ public class PlayerPlantInteraction : MonoBehaviour
     public void SetCurrentPot(PlantPot pot)
     {
         currentPot = pot;
-        // Aquí podrías mostrar/ocultar un cartel "Presiona E para interactuar"
+        if (pressEPanel != null)
+            pressEPanel.SetActive(currentPot != null);
     }
 
     private void Update()
@@ -32,7 +38,6 @@ public class PlayerPlantInteraction : MonoBehaviour
         if (currentPot == null || InventoryManager.Instance == null || hotbarSelector == null)
             return;
 
-        // ✅ TODAS las interacciones con E
         if (Input.GetKeyDown(KeyCode.E))
         {
             HandleInteraction();
@@ -41,19 +46,17 @@ public class PlayerPlantInteraction : MonoBehaviour
 
     void HandleInteraction()
     {
-        // 1️⃣ Primero: intentar COSECHAR (prioridad máxima)
+        // 1️⃣ Cosechar
         if (TryHarvest())
             return;
 
-        // 2️⃣ Después: intentar PLANTAR (si la maceta está vacía y tienes semilla)
+        // 2️⃣ Plantar
         if (TryPlant())
             return;
 
-        // 3️⃣ Finalmente: intentar REGAR (si tienes herramienta de riego)
+        // 3️⃣ Regar
         if (TryWater())
             return;
-
-        // Si nada aplica, no pasa nada (puedes poner un sonido de "no se puede")
     }
 
     bool TryPlant()
@@ -72,7 +75,6 @@ public class PlayerPlantInteraction : MonoBehaviour
         {
             InventoryManager.Instance.RemoveItemFromSlot(true, index, 1);
             PlayInteractAnimation();
-            playerMovimiento.isInteracting = true;
             return true;
         }
 
@@ -89,7 +91,6 @@ public class PlayerPlantInteraction : MonoBehaviour
 
         currentPot.Water();
         PlayInteractAnimation();
-        playerMovimiento.isInteracting = true;
         return true;
     }
 
@@ -102,7 +103,6 @@ public class PlayerPlantInteraction : MonoBehaviour
                 InventoryManager.Instance.AddItem(fruit, amount);
             }
             PlayInteractAnimation();
-            playerMovimiento.isInteracting = true;
             return true;
         }
 
@@ -115,9 +115,18 @@ public class PlayerPlantInteraction : MonoBehaviour
         {
             animator.SetTrigger(interactTrigger);
         }
+
+        if (playerMovimiento != null)
+        {
+            playerMovimiento.isInteracting = true;
+            StopCoroutine(nameof(UnlockAfterDelay));
+            StartCoroutine(UnlockAfterDelay());
+        }
     }
-    public void InteractionFinished()
+
+    IEnumerator UnlockAfterDelay()
     {
+        yield return new WaitForSeconds(interactLockTime);
         if (playerMovimiento != null)
             playerMovimiento.isInteracting = false;
     }

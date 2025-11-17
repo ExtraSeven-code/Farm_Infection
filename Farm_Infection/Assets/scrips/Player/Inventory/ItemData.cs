@@ -25,4 +25,8 @@ public class ItemData : ScriptableObject
 
     [Header("Herramienta (opcional)")]
     public bool isWateringTool;
+
+    [Header("Colocables tipo bloque")]
+    public bool isPlaceableBlock;         
+    public GameObject placeablePrefab;
 }

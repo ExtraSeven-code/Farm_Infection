@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246ceed5cd3cbfb4986fc7965a0a7c6a, type: 3}
+  m_Name: maceta
+  m_EditorClassIdentifier: 
+  recipeName: Maceta
+  ingredients:
+  - item: {fileID: 11400000, guid: 6962de188baa5a14d892b6abc1e9fb15, type: 2}
+    amount: 4
+  resultItem: {fileID: 11400000, guid: aee6f8ac5a396e74ab5ed56d55f634d1, type: 2}
+  resultAmount: 1

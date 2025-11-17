@@ -20,6 +20,6 @@ MonoBehaviour:
   worldPrefab: {fileID: 563350766288374711, guid: e902ef9b471c7584fa1c1f9656c450b9, type: 3}
   isSeed: 1
   plantPrefab: {fileID: 7928922253176607948, guid: 8584e95b389e73a4cb3a80e0056cd2be, type: 3}
-  harvestItem: {fileID: 0}
-  harvestAmount: 1
+  harvestItem: {fileID: 11400000, guid: 8883b0b7168d20942abf0e422757e166, type: 2}
+  harvestAmount: 2
   isWateringTool: 0

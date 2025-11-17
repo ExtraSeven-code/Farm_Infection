@@ -1,10 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlantPot : MonoBehaviour
 {
-    [Header("Dónde aparece la planta")]
+    [Header("UI de la maceta")]
+    public PlantPotUI potUI;
+
+    [Header("DÃ³nde aparece la planta")]
     public Transform plantSpawnPoint;
 
     [Header("Crecimiento")]
@@ -17,6 +20,17 @@ public class PlantPot : MonoBehaviour
     private bool isFullyGrown;
     private bool isWatered;
     private ItemData plantedSeed;
+
+    public bool HasSeed => hasSeed;
+    public bool IsWatered => isWatered;
+    public bool IsFullyGrown => isFullyGrown;
+    public ItemData PlantedSeed => plantedSeed;
+
+    private void Start()
+    {
+        if (potUI != null)
+            potUI.Refresh(this);
+    }
 
     private void Update()
     {
@@ -35,9 +49,12 @@ public class PlantPot : MonoBehaviour
             plantInstance.transform.localScale = Vector3.one * scale;
         }
 
-        if (t >= 1f)
-        {
+        if(t >= 1f && !isFullyGrown)
+{
             isFullyGrown = true;
+
+            if (potUI != null)
+                potUI.Refresh(this);
         }
     }
 
@@ -62,13 +79,20 @@ public class PlantPot : MonoBehaviour
         plantInstance = Instantiate(seed.plantPrefab, pos, Quaternion.identity, transform);
         plantInstance.transform.localScale = Vector3.one * 0.3f;
 
+        if (plantInstance != null && potUI != null)
+            potUI.Refresh(this);
+
         return true;
+        
+
     }
 
     public void Water()
     {
         isWatered = true;
-        // Aquí luego puedes cambiar color tierra, partículas, etc.
+        if (potUI != null)
+            potUI.Refresh(this);
+        // AquÃ­ luego puedes cambiar color tierra, partÃ­culas, etc.
     }
 
     public bool TryHarvest(out ItemData fruit, out int amount)
@@ -90,6 +114,8 @@ public class PlantPot : MonoBehaviour
         isWatered = false;
         growthTimer = 0f;
         plantedSeed = null;
+        if (potUI != null)
+            potUI.Refresh(this);
 
         return fruit != null;
     }

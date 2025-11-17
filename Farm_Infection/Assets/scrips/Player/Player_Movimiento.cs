@@ -29,8 +29,8 @@ public class Player_Movimiento : MonoBehaviour
     void FixedUpdate()
     {
         // ⛔ Bloquear movimiento durante la animación de interacción
-        if (isInteracting)
-        {
+        if(isInteracting)
+    {
             rb.velocity = Vector3.zero;
             animator.SetBool("EstaCaminando", false);
             animator.SetBool("EstaParado", true);
