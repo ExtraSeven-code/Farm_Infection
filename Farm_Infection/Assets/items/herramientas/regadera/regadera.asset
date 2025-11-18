@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   displayName: regadera
   icon: {fileID: 21300000, guid: c23398a30de98f642b77bc079fd9b9f2, type: 3}
-  maxStack: 64
+  maxStack: 1
   isConsumable: 0
   worldPrefab: {fileID: 7664220900394363693, guid: 5faba080345f85d4680375a9444b3f86, type: 3}
   isSeed: 0
@@ -29,3 +29,8 @@ MonoBehaviour:
   toolType: 0
   toolPower: 1
   handPrefab: {fileID: 4297905949184786771, guid: b798d4138718294439c209f0567f68fd, type: 3}
+  isFood: 0
+  restoreHealth: 0
+  restoreStamina: 0
+  restoreHunger: 0
+  restoreSanity: 0

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e059b74ff8f3e45a221ea8b6595764, type: 3}
+  m_Name: Pico
+  m_EditorClassIdentifier: 
+  id: 8
+  displayName: Pico
+  icon: {fileID: 21300000, guid: 47ea3a614be9c7f43855fd284fe4bfdd, type: 3}
+  maxStack: 1
+  isConsumable: 0
+  worldPrefab: {fileID: 0}
+  isSeed: 0
+  plantPrefab: {fileID: 0}
+  harvestItem: {fileID: 0}
+  harvestAmount: 1
+  isWateringTool: 0
+  isPlaceableBlock: 0
+  placeablePrefab: {fileID: 0}
+  isTool: 1
+  toolType: 2
+  toolPower: 1
+  handPrefab: {fileID: 6592789075583060688, guid: bc59aceba41878449b01abae28bbd6f1, type: 3}
+  isFood: 0
+  restoreHealth: 0
+  restoreStamina: 0
+  restoreHunger: 0
+  restoreSanity: 0

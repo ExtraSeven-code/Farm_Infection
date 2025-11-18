@@ -35,7 +35,8 @@ public class ItemData : ScriptableObject
         None,
         Axe,
         Pickaxe,
-        Hoe
+        Hoe,
+        scythe
     }
 
     [Header("Herramientas")]
