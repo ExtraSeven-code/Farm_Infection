@@ -10,4 +10,7 @@ public class VoxelEditorData : MonoBehaviour
     public int selectedIndex = 0;
     public float gridSize = 1f;
     public bool editMode = true;
+
+    [Header("Agrupación en jerarquía")]
+    public Transform rootParent;
 }

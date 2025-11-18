@@ -41,7 +41,6 @@ public class VoxelEditorInspector : Editor
 
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // 🟢 Si estás presionando clic izquierdo, coloca encima del bloque tocado
             if (Event.current.button == 0)
             {
                 Vector3 pos = hit.point + hit.normal * (gridSize / 2f);
@@ -49,7 +48,6 @@ public class VoxelEditorInspector : Editor
                 pos = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z)) * gridSize;
                 return pos;
             }
-            // 🔴 Si es clic derecho, elimina el bloque tocado
             else if (Event.current.button == 1)
             {
                 Vector3 pos = hit.point - hit.normal * (gridSize / 2f);
@@ -59,7 +57,6 @@ public class VoxelEditorInspector : Editor
             }
         }
 
-        // Si no tocó nada, usa plano base Y=0 (para iniciar el mapa)
         Plane plane = new Plane(Vector3.up, Vector3.zero);
         if (plane.Raycast(ray, out float enter))
         {
@@ -81,14 +78,44 @@ public class VoxelEditorInspector : Editor
         Collider[] colliders = Physics.OverlapBox(pos, Vector3.one * (data.gridSize * 0.45f));
         if (colliders.Length > 0) return;
 
+        // 📂 Asegurar carpeta raíz
+        Transform root = data.rootParent;
+        if (root == null)
+        {
+            GameObject existingRoot = GameObject.Find("VoxelRoot");
+            if (existingRoot == null)
+            {
+                existingRoot = new GameObject("VoxelRoot");
+                Undo.RegisterCreatedObjectUndo(existingRoot, "Create VoxelRoot");
+            }
+
+            root = existingRoot.transform;
+            data.rootParent = root;
+        }
+
+        // 📁 Carpeta por tipo de cubo (nombre del prefab)
+        Transform typeFolder = root.Find(prefab.name);
+        if (typeFolder == null)
+        {
+            GameObject folderGO = new GameObject(prefab.name);
+            Undo.RegisterCreatedObjectUndo(folderGO, "Create Voxel Type Folder");
+            folderGO.transform.SetParent(root);
+            folderGO.transform.localPosition = Vector3.zero;
+            folderGO.transform.localRotation = Quaternion.identity;
+            folderGO.transform.localScale = Vector3.one;
+            typeFolder = folderGO.transform;
+        }
+
+        // 🧊 Instanciar cubo
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.transform.position = pos;
+        instance.transform.SetParent(typeFolder); // ← lo metemos en su carpeta
 
-        // 🧩 Escala automática del bloque al tamaño del grid
+        // 🧩 Escala automática
         MeshRenderer rend = instance.GetComponentInChildren<MeshRenderer>();
         if (rend != null)
         {
-            float size = rend.bounds.size.x; // asumimos que es un cubo
+            float size = rend.bounds.size.x; // asumimos cubo
             float scaleFactor = data.gridSize / size;
             instance.transform.localScale = Vector3.one * scaleFactor;
         }

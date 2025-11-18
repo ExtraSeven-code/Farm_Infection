@@ -48,10 +48,10 @@ public class BlockPlacer : MonoBehaviour
         }
 
         // Click derecho -> quitar bloque
-        if (Input.GetMouseButtonDown(1))
-        {
-            TryRemoveBlock(removePos);
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+            //TryRemoveBlock(removePos);
+        //}
     }
 
     void GetPlacementPositions(out Vector3 placePos, out Vector3 removePos)

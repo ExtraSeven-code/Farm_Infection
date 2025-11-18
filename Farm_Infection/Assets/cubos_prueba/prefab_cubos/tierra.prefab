@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2325f6264603cde4b9fc1643a878a0af, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb869ce92f39dc640bec5e4f10772bc7, type: 2}
     - target: {fileID: 919132149155446097, guid: 2325f6264603cde4b9fc1643a878a0af, type: 3}
       propertyPath: m_Name
       value: tierra
