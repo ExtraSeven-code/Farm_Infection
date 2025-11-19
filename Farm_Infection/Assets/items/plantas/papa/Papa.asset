@@ -30,7 +30,7 @@ MonoBehaviour:
   toolPower: 1
   handPrefab: {fileID: 0}
   isFood: 1
-  restoreHealth: 10
-  restoreStamina: 10
-  restoreHunger: 10
-  restoreSanity: 0
+  restoreHealth: 20
+  restoreStamina: 15
+  restoreHunger: 20
+  restoreSanity: 5
