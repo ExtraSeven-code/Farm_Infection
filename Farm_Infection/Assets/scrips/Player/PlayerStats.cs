@@ -151,14 +151,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
-        if (amount <= 0) return;
-
         health -= amount;
-
-        // Puedes bajar un poco la cordura cuando te pega
-        sanity -= amount * 0.1f;
-
         health = Mathf.Clamp(health, 0, maxHealth);
-        sanity = Mathf.Clamp(sanity, 0, maxSanity);
     }
 }
