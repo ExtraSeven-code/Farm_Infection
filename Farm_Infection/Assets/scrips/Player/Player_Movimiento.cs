@@ -138,8 +138,7 @@ public class Player_Movimiento : MonoBehaviour
         if (isInteracting) return false;
         if (isAttacking) return false;
 
-        // Aquí puedes poner costo de estamina:
-        // if (!stats.UseStamina(20f)) return false;
+        if (!stats.UseStamina(20f)) return false;
 
         return IsGroundedByVelocity();
     }

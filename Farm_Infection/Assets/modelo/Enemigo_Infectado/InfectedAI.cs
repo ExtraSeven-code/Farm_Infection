@@ -13,18 +13,18 @@ public class InfectedAI : MonoBehaviour
 
     [Header("Comportamiento")]
     public float patrolRadius = 15f;
-    public float detectionRange = 12f;   // empieza a perseguir
-    public float attackRange = 2.5f;     // rango para intentar atacar
+    public float detectionRange = 12f;   
+    public float attackRange = 2.5f;     
 
     [Header("Ataque")]
     public float damagePerHit = 15f;
 
     [Tooltip("Duración TOTAL del clip de ataque (segundos)")]
-    public float attackAnimDuration = 1.4f;   // 👈 tu clip dura 1.4
+    public float attackAnimDuration = 1.4f;   
 
     [Tooltip("Momento del golpe dentro de la anim (0 = inicio, 1 = final)")]
     [Range(0f, 1f)]
-    public float damageNormalizedTime = 1f;   // 👈 1 = al final del clip
+    public float damageNormalizedTime = 1f;  
 
     [Tooltip("Tiempo extra tras la animación antes de poder atacar otra vez")]
     public float attackCooldown = 0.5f;
@@ -32,7 +32,7 @@ public class InfectedAI : MonoBehaviour
     // Internos
     private bool isAttacking;
     private bool canAttack = true;
-    private bool playerInMeleeTrigger = false;   // trigger delante de la boca
+    private bool playerInMeleeTrigger = false;   
 
     void Awake()
     {
@@ -53,7 +53,6 @@ public class InfectedAI : MonoBehaviour
     {
         if (!player || !playerStats) return;
 
-        // Si está en pleno ataque, no perseguimos ni patrullamos
         if (isAttacking)
         {
             SetAnimatorMoving(false);
@@ -63,12 +62,10 @@ public class InfectedAI : MonoBehaviour
         float dist = Vector3.Distance(transform.position, player.position);
         bool inRangeForAttack = dist <= attackRange || playerInMeleeTrigger;
 
-        // ───── ATACAR ─────
         if (inRangeForAttack && canAttack)
         {
             StartCoroutine(AttackRoutine());
         }
-        // ───── PERSEGUIR ─────
         else if (dist <= detectionRange)
         {
             if (agent && agent.isOnNavMesh)
@@ -78,7 +75,6 @@ public class InfectedAI : MonoBehaviour
             }
             SetAnimatorMoving(true);
         }
-        // ───── PATRULLAR ─────
         else
         {
             if (agent && agent.isOnNavMesh)
@@ -109,15 +105,12 @@ public class InfectedAI : MonoBehaviour
         if (agent && agent.isOnNavMesh)
             agent.isStopped = true;
 
-        // SIEMPRE reproducimos la animación de ataque
         if (animator)
             animator.SetTrigger("Attack");
 
-        // Tiempo exacto del golpe dentro del clip
         float damageTime = attackAnimDuration * Mathf.Clamp01(damageNormalizedTime);
         yield return new WaitForSeconds(damageTime);
 
-        // 👉 AQUÍ se aplica el daño, NO antes
         if (playerStats != null)
         {
             float dist = Vector3.Distance(transform.position, player.position);
@@ -127,7 +120,6 @@ public class InfectedAI : MonoBehaviour
             }
         }
 
-        // Esperamos el resto de la animación + cooldown
         float remaining = Mathf.Max(0f, attackAnimDuration - damageTime) + attackCooldown;
         if (remaining > 0f)
             yield return new WaitForSeconds(remaining);
@@ -151,7 +143,6 @@ public class InfectedAI : MonoBehaviour
         return center;
     }
 
-    // ───── Trigger de melee delante de la boca (opcional) ─────
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

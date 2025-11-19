@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -17,25 +18,24 @@ public class PlayerStats : MonoBehaviour
     public float sanity;
 
     [Header("Velocidades de Decaimiento")]
-    public float hungerDecay = 1f;           // hambre baja siempre
-    public float sanityDecay = 0.2f;         // cordura baja siempre
+    public float hungerDecay = 1f;           
+    public float sanityDecay = 0.2f;         
 
     [Header("Multiplicadores por Estado Crítico")]
-    public float extraSanityLossLowFood = 1.0f;  // comida < 10%
-    public float extraSanityLossLowHealth = 1.0f; // vida < 10%
+    public float extraSanityLossLowFood = 1.0f;  
+    public float extraSanityLossLowHealth = 1.0f; 
 
     [Header("Daño por Hambre 0")]
-    public float starvationDamage = 3f; // vida baja si comida es 0
-
+    public float starvationDamage = 3f; 
     [Header("Regeneración con Comida Buena (>=50%)")]
     public float regenHealth = 2f;
     public float regenStamina = 8f;
     public float regenSanity = 0.5f;
 
     [Header("Umbrales")]
-    public float regenFoodThreshold = 0.5f; // 50%
-    public float lowFoodThreshold = 0.1f;   // 10%
-    public float lowHealthThreshold = 0.1f; // 10%
+    public float regenFoodThreshold = 0.5f; 
+    public float lowFoodThreshold = 0.1f;   
+    public float lowHealthThreshold = 0.1f; 
 
     [Header("Respawn")]
     public Transform respawnPoint;
@@ -56,17 +56,14 @@ public class PlayerStats : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        // --- 1) HAMBRE ++
         hunger -= hungerDecay * dt;
         hunger = Mathf.Clamp(hunger, 0, maxHunger);
 
-        // --- 2) VIDA BAJA SI HAMBRE ES 0 ---
         if (hunger <= 0)
         {
             health -= starvationDamage * dt;
         }
 
-        // --- 3) CORDURA SIEMPRE BAJA ---
         float sanityLoss = sanityDecay;
 
         if (hunger / maxHunger < lowFoodThreshold)
@@ -77,7 +74,6 @@ public class PlayerStats : MonoBehaviour
 
         sanity -= sanityLoss * dt;
 
-        // --- 4) REGENERACIÓN (SOLO SI COMIDA >= 50%) ---
         bool canRegen = hunger >= maxHunger * regenFoodThreshold;
 
         if (canRegen)
@@ -92,13 +88,11 @@ public class PlayerStats : MonoBehaviour
                 sanity += regenSanity * dt;
         }
 
-        // CLAMP FINAL
         health = Mathf.Clamp(health, 0, maxHealth);
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
         sanity = Mathf.Clamp(sanity, 0, maxSanity);
         hunger = Mathf.Clamp(hunger, 0, maxHunger);
 
-        // --- 5) REVISAR MUERTE ---
         if (health <= 0)
             Respawn();
 
@@ -106,7 +100,6 @@ public class PlayerStats : MonoBehaviour
             DeathBySanity();
     }
 
-    // Consumir estamina (para correr / saltar)
     public bool UseStamina(float amount)
     {
         if (stamina < amount)
@@ -134,14 +127,16 @@ public class PlayerStats : MonoBehaviour
     void Respawn()
     {
         transform.position = respawnPoint.position;
-        health = maxHealth * 0.5f; // reapareces con 50% vida
+        health = maxHealth * 0.5f; 
         stamina = maxStamina;
     }
 
     void DeathBySanity()
     {
         movement.canMove = false;
-        // Aquí ponemos UI de game over
+
+        SceneManager.LoadScene("DeleteScene");
+
         Debug.Log("CORDURA = 0 → PERDISTE EL JUEGO.");
     }
     public void ModifySanity(float amount)

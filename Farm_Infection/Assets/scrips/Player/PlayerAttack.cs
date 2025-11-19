@@ -9,17 +9,16 @@ public class PlayerAttack : MonoBehaviour
     public HotbarSelector hotbar;
 
     [Header("Ataque")]
-    public float attackDuration = 0.6f;   // duración total de la anim de atacar (segundos)
-    public float hitTime = 0.35f;        // en qué segundo del ataque pega el golpe
+    public float attackDuration = 0.6f;   
+    public float hitTime = 0.35f;        
 
     private bool isAttacking = false;
-    private ChoppableTree currentTree;   // árbol dentro del trigger
+    private ChoppableTree currentTree;   
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !isAttacking)
         {
-            // Solo tiene sentido atacar si hay algo y tiene herramienta
             ItemData tool = hotbar.GetSelectedItem();
             if (tool != null && tool.isTool && currentTree != null)
             {
@@ -31,9 +30,9 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator AttackRoutine(ItemData tool)
     {
         isAttacking = true;
-        movement.canMove = false;          // ❌ bloquear movimiento
+        movement.canMove = false;          
 
-        animator.SetTrigger("Atacar");     // ▶ reproducir animación
+        animator.SetTrigger("Atacar");    
 
         // ⏱ esperar hasta el momento del impacto
         yield return new WaitForSeconds(hitTime);
@@ -44,15 +43,13 @@ public class PlayerAttack : MonoBehaviour
             currentTree.Hit(tool);
         }
 
-        // ⏱ esperar el resto de la animación
         float remaining = Mathf.Max(0f, attackDuration - hitTime);
         yield return new WaitForSeconds(remaining);
 
-        movement.canMove = true;           // ✅ volver a mover
+        movement.canMove = true;           
         isAttacking = false;
     }
 
-    // ───────── DETECCIÓN DEL ÁRBOL POR TRIGGER ─────────
 
     private void OnTriggerEnter(Collider other)
     {

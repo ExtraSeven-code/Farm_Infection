@@ -20,14 +20,12 @@ public class VoxelEditorInspector : Editor
         Handles.color = Color.green;
         Handles.DrawWireCube(pos, Vector3.one * data.gridSize);
 
-        // 🟩 Clic izquierdo - colocar bloque
         if (e.type == EventType.MouseDown && e.button == 0 && !e.alt)
         {
             PlaceVoxel(data, pos);
             e.Use();
         }
 
-        // ❌ Clic derecho - borrar bloque
         if (e.type == EventType.MouseDown && e.button == 1 && !e.alt)
         {
             RemoveVoxel(pos, data.gridSize);
@@ -93,7 +91,6 @@ public class VoxelEditorInspector : Editor
             data.rootParent = root;
         }
 
-        // 📁 Carpeta por tipo de cubo (nombre del prefab)
         Transform typeFolder = root.Find(prefab.name);
         if (typeFolder == null)
         {
@@ -106,12 +103,10 @@ public class VoxelEditorInspector : Editor
             typeFolder = folderGO.transform;
         }
 
-        // 🧊 Instanciar cubo
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.transform.position = pos;
         instance.transform.SetParent(typeFolder); // ← lo metemos en su carpeta
 
-        // 🧩 Escala automática
         MeshRenderer rend = instance.GetComponentInChildren<MeshRenderer>();
         if (rend != null)
         {

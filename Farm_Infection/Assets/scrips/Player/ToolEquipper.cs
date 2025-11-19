@@ -28,11 +28,9 @@ public class ToolEquipper : MonoBehaviour
 
         ItemData selected = hotbarSelector.GetSelectedItem();
 
-        // Si es el mismo item, no hacemos nada
         if (selected == currentEquippedItem)
             return;
 
-        // Si cambió el ítem → reequipar
         Equip(selected);
     }
 
@@ -40,21 +38,17 @@ public class ToolEquipper : MonoBehaviour
     {
         currentEquippedItem = newItem;
 
-        // Destruir el modelo anterior
         if (currentInstance != null)
         {
             Destroy(currentInstance);
             currentInstance = null;
         }
 
-        // Si no hay item, o no tiene modelo en mano, no instanciamos nada
         if (newItem == null || newItem.handPrefab == null)
             return;
 
-        // Instanciar el modelo en la mano
         currentInstance = Instantiate(newItem.handPrefab, handSocket);
 
-        // Resetear posición/rotación local (ajusta desde el prefab o desde el socket)
         currentInstance.transform.localPosition = Vector3.zero;
         currentInstance.transform.localRotation = Quaternion.identity;
     }

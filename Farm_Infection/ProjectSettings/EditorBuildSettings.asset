@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 7f279859e4c4906469f217699b49ac8e
+  - enabled: 1
+    path: Assets/Scenes/Farm_Infection.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/DeleteScene.unity
+    guid: c6fcb1bf3b7dcba45b1b6627e279dfc6
   m_configObjects: {}

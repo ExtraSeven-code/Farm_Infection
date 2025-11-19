@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DropItemFromHotbar : MonoBehaviour
 {
-    public Transform dropOrigin;        // de dónde sale el objeto (cámara o jugador)
+    public Transform dropOrigin;        
     public float dropForwardForce = 3f;
     public float dropUpForce = 2f;
 
@@ -14,12 +14,11 @@ public class DropItemFromHotbar : MonoBehaviour
     {
         hotbarSelector = FindObjectOfType<HotbarSelector>();
         if (dropOrigin == null)
-            dropOrigin = transform; // por si se te olvida asignarlo
+            dropOrigin = transform; 
     }
 
     private void Update()
     {
-        // Q para soltar como en Minecraft
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DropSelectedItem();
@@ -44,15 +43,12 @@ public class DropItemFromHotbar : MonoBehaviour
             return;
         }
 
-        // 1️⃣ Restar 1 del stack en la hotbar
         bool removed = InventoryManager.Instance.RemoveItemFromSlot(true, index, 1);
         if (!removed) return;
 
-        // 2️⃣ Instanciar el prefab delante del jugador
         Vector3 spawnPos = dropOrigin.position + dropOrigin.forward * 1f + Vector3.up * 0.5f;
         GameObject dropped = Instantiate(item.worldPrefab, spawnPos, Quaternion.identity);
 
-        // 3️⃣ Darle un empujoncito
         Rigidbody rb = dropped.GetComponent<Rigidbody>();
         if (rb != null)
         {

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class SlotUI : MonoBehaviour
 {
     [Header("Config")]
-    public bool isHotbar;   // true = hotbar, false = inventario grande
-    public int index;       // 0,1,2...
+    public bool isHotbar;   
+    public int index;       
 
     [Header("Referencias UI")]
     public Image iconImage;
@@ -39,7 +39,6 @@ public class SlotUI : MonoBehaviour
             iconImage.enabled = true;
             iconImage.sprite = slot.item.icon;
 
-            // ✅ Mostrar siempre la cantidad (incluido el 1)
             quantityText.text = slot.quantity.ToString();
         }
     }
@@ -48,7 +47,6 @@ public class SlotUI : MonoBehaviour
         if (backgroundImage == null)
             return;
 
-        // Solo queremos resaltar slots de la hotbar
         if (!isHotbar)
         {
             backgroundImage.color = normalColor;
@@ -62,7 +60,6 @@ public class SlotUI : MonoBehaviour
             return;
         }
 
-        // ¿Este slot es el índice activo de la hotbar?
         if (selector.currentIndex == index)
             backgroundImage.color = selectedColor;
         else

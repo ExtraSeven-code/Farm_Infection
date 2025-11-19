@@ -12,9 +12,9 @@ public class ChoppableTree : MonoBehaviour
     public ToolType requiredTool = ToolType.Axe;
 
     [Header("Drop")]
-    public GameObject dropPrefab;  // 👈 prefab del WorldItemDrop
-    public ItemData dropItem;      // Item que va dentro del drop
-    public int dropAmount = 3;     // cuánta madera suelta
+    public GameObject dropPrefab;  
+    public ItemData dropItem;      
+    public int dropAmount = 3;     
 
     private void Start()
     {
@@ -44,15 +44,13 @@ public class ChoppableTree : MonoBehaviour
 
     void ChopDown()
     {
-        // ✅ En vez de Inventory.AddItem → spawneamos drops
         if (dropPrefab != null && dropItem != null)
         {
-            // Puedes soltar varios ítems
             int remaining = dropAmount;
 
             while (remaining > 0)
             {
-                int stack = Mathf.Min(remaining, 1); // si quieres 1 por drop, deja 1
+                int stack = Mathf.Min(remaining, 1); 
 
                 Vector3 spawnPos = transform.position + Vector3.up +
                                    Random.insideUnitSphere * 0.3f;
@@ -70,7 +68,6 @@ public class ChoppableTree : MonoBehaviour
             }
         }
 
-        // Efectos opcionales: partículas, sonido, cambiar a tocón, etc.
         Destroy(gameObject);
     }
 }

@@ -46,15 +46,12 @@ public class PlayerPlantInteraction : MonoBehaviour
 
     void HandleInteraction()
     {
-        // 1️⃣ Cosechar
         if (TryHarvest())
             return;
 
-        // 2️⃣ Plantar
         if (TryPlant())
             return;
 
-        // 3️⃣ Regar
         if (TryWater())
             return;
     }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class HouseDoorInteraction : MonoBehaviour
 {
     public HouseResident house;
-    public GameObject feedPanel;        // panel con el slot único
+    public GameObject feedPanel;        
     public GameObject pressEIndicator;
 
     private bool playerInside = false;
     private bool panelOpen = false;
 
-    private HouseFoodSlot foodSlot;     // referencia al script del slot
+    private HouseFoodSlot foodSlot;     
 
     void Start()
     {

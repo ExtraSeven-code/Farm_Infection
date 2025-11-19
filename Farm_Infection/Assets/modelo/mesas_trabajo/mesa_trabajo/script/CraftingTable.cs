@@ -8,7 +8,7 @@ public class CraftingTable : MonoBehaviour
     public CraftingRecipe[] recipes;
 
     [Header("UI de crafteo")]
-    public GameObject craftingPanel;   // panel del Canvas con los botones, etc.
+    public GameObject craftingPanel;   
 
     private void Start()
     {
@@ -28,7 +28,6 @@ public class CraftingTable : MonoBehaviour
             craftingPanel.SetActive(false);
     }
 
-    // Llamado desde los botones de la UI con índice de receta
     public void Craft(int recipeIndex)
     {
         if (recipeIndex < 0 || recipeIndex >= recipes.Length)
@@ -39,13 +38,10 @@ public class CraftingTable : MonoBehaviour
 
         if (InventoryManager.Instance == null) return;
 
-        // 1️⃣ Verificar si el jugador tiene todos los ingredientes
         if (!HasIngredients(recipe)) return;
 
-        // 2️⃣ Consumir ingredientes
         ConsumeIngredients(recipe);
 
-        // 3️⃣ Dar resultado
         InventoryManager.Instance.AddItem(recipe.resultItem, recipe.resultAmount);
     }
 
@@ -63,7 +59,6 @@ public class CraftingTable : MonoBehaviour
     {
         int count = 0;
 
-        // revisamos hotbar + inventario
         foreach (var slot in InventoryManager.Instance.hotbar)
             if (slot.item == item) count += slot.quantity;
 
@@ -79,9 +74,7 @@ public class CraftingTable : MonoBehaviour
         {
             int remaining = ing.amount;
 
-            // Primero hotbar
             remaining = RemoveFromList(InventoryManager.Instance.hotbar, ing.item, remaining);
-            // Luego inventario
             remaining = RemoveFromList(InventoryManager.Instance.inventory, ing.item, remaining);
         }
     }
