@@ -144,4 +144,21 @@ public class PlayerStats : MonoBehaviour
         // Aquí ponemos UI de game over
         Debug.Log("CORDURA = 0 → PERDISTE EL JUEGO.");
     }
+    public void ModifySanity(float amount)
+    {
+        sanity += amount;
+        sanity = Mathf.Clamp(sanity, 0, maxSanity);
+    }
+    public void TakeDamage(float amount)
+    {
+        if (amount <= 0) return;
+
+        health -= amount;
+
+        // Puedes bajar un poco la cordura cuando te pega
+        sanity -= amount * 0.1f;
+
+        health = Mathf.Clamp(health, 0, maxHealth);
+        sanity = Mathf.Clamp(sanity, 0, maxSanity);
+    }
 }

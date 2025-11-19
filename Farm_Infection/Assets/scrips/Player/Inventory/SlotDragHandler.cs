@@ -20,7 +20,7 @@ public class SlotDragHandler : MonoBehaviour,
     private TextMeshProUGUI dragQuantity;
 
     // Slot desde el que estamos arrastrando (compartido por todos)
-    private static SlotDragHandler draggingSlot;
+    public static SlotDragHandler draggingSlot;
 
     private void Awake()
     {
