@@ -37,7 +37,6 @@ public class PlantPotUI : MonoBehaviour
             canvas.enabled = shouldShow;
     }
 
-    // Llamado por PlantPot cuando cambia el estado
     public void Refresh(PlantPot pot)
     {
         if (pot == null || !pot.HasSeed)
@@ -67,11 +66,9 @@ public class PlantPotUI : MonoBehaviour
             }
         }
 
-        // Agua (solo mientras necesita agua y no está madura)
         if (waterIcon != null)
             waterIcon.enabled = !pot.IsWatered && !pot.IsFullyGrown;
 
-        // Mano (cuando está lista para cosechar)
         if (handIcon != null)
             handIcon.enabled = pot.IsFullyGrown;
     }

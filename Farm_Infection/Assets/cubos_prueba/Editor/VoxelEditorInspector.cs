@@ -105,12 +105,12 @@ public class VoxelEditorInspector : Editor
 
         GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         instance.transform.position = pos;
-        instance.transform.SetParent(typeFolder); // ← lo metemos en su carpeta
+        instance.transform.SetParent(typeFolder); 
 
         MeshRenderer rend = instance.GetComponentInChildren<MeshRenderer>();
         if (rend != null)
         {
-            float size = rend.bounds.size.x; // asumimos cubo
+            float size = rend.bounds.size.x; 
             float scaleFactor = data.gridSize / size;
             instance.transform.localScale = Vector3.one * scaleFactor;
         }

@@ -92,7 +92,6 @@ public class PlantPot : MonoBehaviour
         isWatered = true;
         if (potUI != null)
             potUI.Refresh(this);
-        // Aquí luego puedes cambiar color tierra, partículas, etc.
     }
 
     public bool TryHarvest(out ItemData fruit, out int amount)

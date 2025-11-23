@@ -34,10 +34,8 @@ public class PlayerAttack : MonoBehaviour
 
         animator.SetTrigger("Atacar");    
 
-        // ⏱ esperar hasta el momento del impacto
         yield return new WaitForSeconds(hitTime);
 
-        // 💥 aplicar daño AQUÍ
         if (currentTree != null)
         {
             currentTree.Hit(tool);

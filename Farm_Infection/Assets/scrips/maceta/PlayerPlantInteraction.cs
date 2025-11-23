@@ -9,7 +9,7 @@ public class PlayerPlantInteraction : MonoBehaviour
     public string interactTrigger = "Interact";
 
     [Header("Bloqueo de movimiento")]
-    public float interactLockTime;   // dura lo que dura la animación
+    public float interactLockTime;   
 
     private HotbarSelector hotbarSelector;
     private PlantPot currentPot;

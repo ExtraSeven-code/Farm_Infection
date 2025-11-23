@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player_Movimiento : MonoBehaviour
 {
     [Header("Referencias")]
-    public Transform orientation;      // empty alineado con la cámara
-    public Transform cameraTransform;  // Main Camera
+    public Transform orientation;      
+    public Transform cameraTransform;  
 
     private Rigidbody rb;
     private Animator animator;
@@ -16,7 +16,7 @@ public class Player_Movimiento : MonoBehaviour
     [Header("Movimiento")]
     public float moveSpeed = 5f;
     public float runSpeed = 8f;
-    public float rotationSpeed = 720f; // grados por segundo
+    public float rotationSpeed = 720f;
 
     [Header("Salto")]
     public float jumpForce = 7f;
@@ -45,7 +45,6 @@ public class Player_Movimiento : MonoBehaviour
 
     void Update()
     {
-        // Rotación independiente de la cámara → orientación
         Vector3 viewDir = cameraTransform.forward;
         viewDir.y = 0f;
         viewDir.Normalize();
@@ -68,7 +67,6 @@ public class Player_Movimiento : MonoBehaviour
             isRunning = false;
         }
 
-        // Saltar
         if (Input.GetKeyDown(KeyCode.Space) && CanJump())
         {
             Jump();
@@ -96,7 +94,6 @@ public class Player_Movimiento : MonoBehaviour
             isWalking = true;
             isIdle = false;
 
-            // Rotación suave
             Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
@@ -120,7 +117,6 @@ public class Player_Movimiento : MonoBehaviour
         UpdateAnimatorGrounded();
     }
 
-    // --- Suelo basado en velocidad vertical ---
     bool IsGroundedByVelocity()
     {
         return Mathf.Abs(rb.velocity.y) < groundedVelocityThreshold;

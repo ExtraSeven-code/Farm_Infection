@@ -5,12 +5,11 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     [Header("Item que va a dar")]
-    public ItemData item;  // asignas tu semilla aquí
+    public ItemData item;  
     public int amount = 1;
 
     private void OnTriggerEnter(Collider other)
     {
-        // Solo reaccionar al jugador
         if (!other.CompareTag("Player"))
             return;
 
@@ -24,8 +23,8 @@ public class ItemPickup : MonoBehaviour
 
         if (added)
         {
-            // Se añadió correctamente al inventario
-            Destroy(gameObject); // desaparece la semilla del mundo
+            
+            Destroy(gameObject); 
         }
         else
         {

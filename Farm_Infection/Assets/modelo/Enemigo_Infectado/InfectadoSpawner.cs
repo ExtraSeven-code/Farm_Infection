@@ -17,7 +17,6 @@ public class InfectadoSpawner : MonoBehaviour
 
     private void Update()
     {
-        // Por si DayNightCycle aparece después
         if (!subscribed)
             TrySubscribe();
     }
@@ -43,7 +42,6 @@ public class InfectadoSpawner : MonoBehaviour
 
         Debug.Log("[Spawner] Suscrito a DayNightCycle");
 
-        // Si ya es de noche cuando nos suscribimos → spawn inmediato
         if (DayNightCycle.Instance.IsNight)
         {
             SpawnInfected();
